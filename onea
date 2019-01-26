@@ -73,9 +73,9 @@ main:- tests, testNepotism.
 :- op(896,  xfy,  in).
 :- op(897,  xfy,  has).
 :- op(897,  xfy,  had).
-:- op(898,  xfy,  and).
-:- op(899,  xfy,  or).
-:- op(  1,  fx,   not).
+:- op(899,  xfy,  and).
+:- op(900,  xfy,  or).
+:- op(898,  fx,   not).
 
 
 rule1 if a then b.
@@ -133,6 +133,12 @@ if
 then
      emp =E has job = J2.
 
+% Tests the functionality of or between hads
+rule 17 if emp=tim had job=professor or emp=tim had job=cleaner then c.
+
+% Tests the functionality of not before a had
+rule 18 if emp=tim had job=cleaner and not emp=tim had job=professor then c.
+
 % 222222222222222222222222222222222222222222222222222222222222
 
 % Get rule conditon testing on solo facts to work.
@@ -166,6 +172,12 @@ test(16).
 
 % 5555555555555555555555555555555555555555555555555555555555
 
+test(nepotism).
+
+test(17).
+
+test(18).
+
 % get the nepotism rule to fire.
 % Hint, if all the above works, then this should work fine.
 
@@ -182,15 +194,23 @@ testNepotism :-
 % Write rules and "test" facts to show that you can handle
 % "or" and "not"
 
+% Added above so as to not load errors
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % you should use the following code.
 % WARNING: the code for "had" is incomplete
 
 had(X and Y)      :- had(X), had(Y).
+had(X or Y)       :- had(X); had(Y).
+had(not X)        :- \+ had(X).
 had(X =Id had Y)  :- fact(X,Id,Fs),  b4(Y,Fs).
 
 b4(X had Y,Fs)    :- b4(X,Fs), b4(Y,Fs).
 b4(X in [H|T],Fs) :- b4(X=H, Fs); b4(X in T, Fs).
+b4(X \= Y, Fs)    :- b4(X=Z,Fs), Z \= Y.
+b4(X > Y, Fs)     :- b4(X=Z,Fs), Z > Y.
+b4(X < Y, Fs)     :- b4(X=Z,Fs), Z < Y.
+b4(X =< Y, Fs)    :- b4(X=Z,Fs), Z >= Y.
 b4(X =< Y, Fs)    :- b4(X=Z,Fs), Z =< Y.
 b4(X =  Y, Fs)    :- member(X=Y,Fs).
 
