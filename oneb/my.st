@@ -137,11 +137,15 @@ printOn: aStream
      nextPutAll: ')' !
 !
 
-!Collection class methodsFor: 'testing' !
+! Collection class methodsFor: 'testing' !
 goodB4Now
   #(10 21 32 43 54) b4Now: [:b4 :now|
     ((now-b4)/b4) asFloat oo] !!
 
+! Collection methods !
+b4Now: aBlock 
+  1 to: (self size - 1) do: [:i | aBlock value: (self at: i) value: (self at: i+1)]
+  !!
 
 ! Object class methodsFor: 'testing' !
 goodVisit
