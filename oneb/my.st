@@ -137,15 +137,36 @@ printOn: aStream
      nextPutAll: ')' !
 !
 
-! Collection class methodsFor: 'testing' !
+!Collection class methodsFor: 'testing' !
 goodB4Now
   #(10 21 32 43 54) b4Now: [:b4 :now|
     ((now-b4)/b4) asFloat oo] !!
-
+    
+" Iterator - 1b3 ******************************************************************"
 ! Collection methods !
 b4Now: aBlock 
-  1 to: (self size - 1) do: [:i | aBlock value: (self at: i) value: (self at: i+1)]
+  1 to: (self size - 1) do: [:i | aBlock value: (self at: i) value: (self at: i+1)].
   !!
+
+"**********************************************************************************"
+
+" Polymorphism - 1b3 **************************************************************"
+! Object methods !
+visit: aBlock
+  (1 > 0) ifTrue: [aBlock value: self]
+!!
+
+! String methods !
+visit: aBlock
+  (1 > 0) ifTrue: [aBlock value: self]
+!!
+
+! Collection methods !
+visit: aBlock 
+  1 to: (self size) do: [:i | ((self at: i) visit: aBlock)]
+  !!
+
+"**********************************************************************************"
 
 ! Object class methodsFor: 'testing' !
 goodVisit
@@ -160,6 +181,4 @@ goodVisit
     "
     w visit:[:a| a oo] 
 !!
-
-
 
