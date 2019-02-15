@@ -1,0 +1,61 @@
+
+11111111111111111111111111111111111111111111111111
+
+1a. In LISP, what is an association list?
+
+An assiciation list is a list of keypairs. The key is referred to as the car and the data is referred to as the cdr. 
+
+1b. What does the function `assoc` do?
+
+The function `assoc` searches an association list and returns the first pair where the car matches the value passed into the function. In this particular example, the pair (R . X) is returned because it is the first pair in the list where r is the car.
+
+1c. What does the list mapcan function do? Give an example of its use.
+
+Mapcan performs a function on each element of a list and then concatenates the results. One possible application would be if you wanted every element in a list to be repeated (shown below).
+
+( mapcan ( lambda ( x ) ( list x x ) ) '( 1 2 3 4 ) )
+
+1d. Give a small example of using LISP hash tables to (1) crete a
+hash table then (2) write something into that hash table then (3)
+read that value back.
+
+( defparameter *ht* (make-hash-table) )
+( setf ( gethash 'a-key *ht* ) 'a-value )
+( gethash 'a-key *ht* )
+
+1e. What does the LISP "sublis" function do? Give
+an example.
+
+Given an association list and an expression, the sublis function replaces all instances of the association list's cars in the expression with their associated cdr. Example:
+
+(sublis '((x . sand)) '(I dont like x))
+
+1f. In Prolog, what is the role of the bindings variable "binds".
+
+**********TODO: ANSWER THIS************
+
+1g. There seems to be a missing function. The examples shown below
+use an `(= ?x ?x)` rule but there is no support code anywhere else
+for `=`. So how does `(= ?x ?x)` work?
+
+**********TODO: ANSWER THIS************
+
+1h. What does "(gensym "?")" do?
+
+It produces a unique symbol that is prefixed with #:?
+
+1i. The following rules illustrates the need for variable renaming.
+Why is such renaming required? What could go wrong (with the 
+?x and ?y bindings) as our Prolog does inference over these two 
+rules.
+
+The rules for both child and daughter use the same argument names, but in opposite order. Because daughter references child, there is risk of the arguments becoming confused.
+
+1j. (HARD) The code for "prove" that handles conjunctions seem wrong.  Why
+does the "and" clause in "prove" use "reverse"? Write a comment in
+the "ands" function that explains why we needed that reverse.
+
+**********TODO: ANSWER THIS************
+
+22222222222222222222222222222222222222222222222222222
+
