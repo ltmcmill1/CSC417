@@ -271,5 +271,21 @@ need to fix something inside `data0`.
                   (has-vars r))
           r))
 
+;-----------------STUDENT CODE----------------------------------------
+
+;-----------------2A--------------------------------------------------
+(defun known (a pairs)
+  (if (assoc a pairs)
+    (known (cdr(assoc a pairs)) pairs)
+    a))
+
+;-----------------2B--------------------------------------------------
+(defun has-vars (x)
+  (if (not x) (return-from has-vars nil))
+  (if (var? x) (return-from has-vars (cons x nil)))
+  (if (not (listp x)) (return-from has-vars nil))
+  (union (has-vars (car x))
+  (has-vars (cdr x))))
+
 
 (test1)
