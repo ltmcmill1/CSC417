@@ -32,13 +32,13 @@ Given an association list and an expression, the sublis function replaces all in
 
 1f. In Prolog, what is the role of the bindings variable "binds".
 
-**********TODO: ANSWER THIS************
+The role of the bindings variable in Prolog is to holds all values that make the predicate true.
 
 1g. There seems to be a missing function. The examples shown below
 use an `(= ?x ?x)` rule but there is no support code anywhere else
 for `=`. So how does `(= ?x ?x)` work?
 
-**********TODO: ANSWER THIS************
+Since ?x is a binding to a atom, the evaluation of this code at runtime can use the normal = operator defined by LISP. The atoms equality will be evaluated as usual.
 
 1h. What does "(gensym "?")" do?
 
