@@ -9,4 +9,4 @@
   (union (has-vars (car x))
   (has-vars (cdr x))))
 
-(print (HAS-VARS '(AND (PARENT ?X ?Y) (MALE ?X))))
+(HAS-VARS '(AND (PARENT ?X ?Y) (MALE ?X)))

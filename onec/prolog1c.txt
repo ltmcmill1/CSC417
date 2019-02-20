@@ -57,5 +57,3 @@ the "ands" function that explains why we needed that reverse.
 
 **********TODO: ANSWER THIS************
 
-22222222222222222222222222222222222222222222222222222
-

@@ -157,7 +157,8 @@ need to fix something inside `data0`.
         (parent ?x ?y) 
         (male ?x)))
   (<- (sibling ?x ?y) 
-      (and (parent ?z ?x)
+      (and (not (= ?x ?y)) ; doesn't work, problem of logical negation
+           (parent ?z ?x)
            (parent ?z ?y))))
 
 
@@ -212,13 +213,21 @@ need to fix something inside `data0`.
          (has-vars question))
    ,@body))))
 
+;-----------------3A--------------------------------------------------
+(defun show (var)
+  (format t "[~A]~C" var #\linefeed))
+
 (defun prove (expr &optional binds)
   (case (car expr)
     (and  (ands        (reverse (cdr expr))   binds))
     (or   (ors         (cdr  expr)            binds))
     (not  (negation    (cadr expr)            binds))
+;-----------------3A--------------------------------------------------
     (do   (evals       (cadr expr)            binds))
-    (t    (prove1      (car  expr) (cdr expr) binds))))
+;-----------------3B--------------------------------------------------
+    (>    (evalsp      expr                   binds))
+    (t    (prove1      (car  expr) (cdr expr) binds))
+    ))
 
 ;--------- --------- --------- --------- --------- --------- ---------
 (defun ands (goals binds)
@@ -235,6 +244,21 @@ need to fix something inside `data0`.
 (defun negation (goal binds)
   (unless (prove goal binds)
     (list binds)))
+
+(defun evalsp (expr binds)
+  " turns e.g. (print (list ?a ?b)) into
+    (let ((?a x) ; where x is computed from (known ?a binds)
+          (?b y)); where y is computed from (known ?b binds)
+      (print ?a ?b))"
+  (labels 
+    ((local-vars ()
+        (mapcar 
+          (lambda (x) 
+                 `(,x ',(known x binds))) 
+             (has-vars expr))))
+    (if (eval `(let ,(local-vars) 
+              ,expr))
+    (list binds))))
 
 (defun evals (expr binds)
   " turns e.g. (print (list ?a ?b)) into
