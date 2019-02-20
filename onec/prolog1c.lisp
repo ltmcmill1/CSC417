@@ -157,9 +157,9 @@ need to fix something inside `data0`.
         (parent ?x ?y) 
         (male ?x)))
   (<- (sibling ?x ?y) 
-      (and (not (= ?x ?y)) ; doesn't work, problem of logical negation
-           (parent ?z ?x)
-           (parent ?z ?y))))
+      (and (parent ?z ?x)
+           (parent ?z ?y)
+           (not (= ?x ?y)))))
 
 
 ;--------- --------- --------- --------- --------- --------- ---------
@@ -226,6 +226,9 @@ need to fix something inside `data0`.
     (do   (evals       (cadr expr)            binds))
 ;-----------------3B--------------------------------------------------
     (>    (evalsp      expr                   binds))
+    (>=   (evalsp      expr                   binds))
+    (<    (evalsp      expr                   binds))
+    (<=   (evalsp      expr                   binds))
     (t    (prove1      (car  expr) (cdr expr) binds))
     ))
 
