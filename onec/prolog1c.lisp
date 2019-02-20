@@ -159,6 +159,7 @@ need to fix something inside `data0`.
   (<- (sibling ?x ?y) 
       (and (parent ?z ?x)
            (parent ?z ?y)
+;-----------------3C--------------------------------------------------
            (not (= ?x ?y)))))
 
 
