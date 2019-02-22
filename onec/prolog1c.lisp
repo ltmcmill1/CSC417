@@ -234,6 +234,8 @@ need to fix something inside `data0`.
     ))
 
 ;--------- --------- --------- --------- --------- --------- ---------
+; Goals must be in the reverse order of how the expression is written. The reverse is necessary due to the recursive nature of the algorithm. Since recursion uses a stack, the first operation to get proven
+; is the last one to be called. Therefore, the reverse makes sure that the clauses are proven in the expected order. This will ensure short circuiting works appropriately.
 (defun ands (goals binds)
   (if (null goals)
       (list binds)

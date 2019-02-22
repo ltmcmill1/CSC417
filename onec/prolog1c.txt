@@ -55,5 +55,6 @@ The rules for both child and daughter use the same argument names, but in opposi
 does the "and" clause in "prove" use "reverse"? Write a comment in
 the "ands" function that explains why we needed that reverse.
 
-**********TODO: ANSWER THIS************
+The reverse is necessary due to the recursive nature of the algorithm. Since recursion uses a stack, the first operation to get proven is the last one to be called. Therefore,
+the reverse makes sure that the clauses are proven in the expected order. This will ensure short circuiting works appropriately.
 
