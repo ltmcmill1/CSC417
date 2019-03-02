@@ -136,12 +136,10 @@ which has the general form:
 The code for this is as follows (but "methods-as-case"
 and "datas-as-case" is missing... till you write it.
 
-
+|#
 
 (defun send (obj mess &rest args) 
   (apply (funcall obj mess) args))
-
-|#
 
 (defun method-as-case (x)
   (let ((y (car x)))
@@ -255,6 +253,18 @@ TODO 2c. Show the output from the following test
 
 |#
 
+(defthing
+ circle
+ :has ((x) (y) (radius))
+ :does ((area ()
+              (* 2 pi radius radius))))
+
+(defthing
+ rectangle
+ :has ((x1 0) (x2 0) (y1 0) (y2 0))
+ :does ((area ()
+              (* (abs (- x1 x2)) (abs (- y1 y2))))))
+
 (defun polymorphism()
   (let ((sum 0)
         (all (list (circle :radius 1) 
@@ -265,7 +275,7 @@ TODO 2c. Show the output from the following test
     (print `(polymorphism ,sum))))
 
 ; to run, uncomment the following
-'(polymorphism)
+(polymorphism)
 
 #|
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
