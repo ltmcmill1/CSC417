@@ -136,10 +136,25 @@ which has the general form:
 The code for this is as follows (but "methods-as-case"
 and "datas-as-case" is missing... till you write it.
 
-|#
+
 
 (defun send (obj mess &rest args) 
   (apply (funcall obj mess) args))
+
+|#
+
+(defun method-as-case (x)
+  (let ((y (car x)))
+    `(,y (lambda ,@(cdr x)))))
+
+(defun methods-as-case (lst)
+  (mapcar #'method-as-case lst))
+
+(defun data-as-case (x)
+  `(,x (lambda nil ,x)))
+
+(defun datas-as-case (data)
+  (mapcar #'data-as-case data))
 
 (defmacro defthing (klass &key has does)
   (let* ((message (gensym "MESSAGE")))
@@ -148,13 +163,16 @@ and "datas-as-case" is missing... till you write it.
          (case ,message
            ,@(methods-as-case does)
            ,@(datas-as-case (mapcar #'car has)))))))
-
 #|
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 1. Make defthing work
 
 TODO 1a. Why does mapcar call #'car over the "has"?
+Since only the name of each property is needed, car is used over has as a way of simplifying the data structure that's passed into datas-as-case.
+
 TODO 1b. Why is message set to a gensym?
+The message is set to a gensym to prevent variable name clashing.
+
 TODO 1c. Implement "data-as-case": 
 
     (datas-as-case '(name balance interest-rate))
@@ -176,7 +194,7 @@ expand nicely:
 |#
 
 ; but first, uncomment this code
-'(defthing
+(defthing
   account
   :has  ((name) (balance 0) (interest-rate .05))
   :does ((withdraw (amt)
@@ -193,7 +211,7 @@ TODO 1e. Show the result of expanding you account.
 |#
 
 ; uncomment this to see what an account looks like
-'(xpand (account))
+(xpand (account))
 
 #|
 1f. Fix "withdraw" in "account" such that if you withdraw more than
