@@ -5,7 +5,7 @@ In this assignment you will use the LISP macro system
 to learn that "objects" can be viewed as macros that
 generate "lambdas".
 
-To find what you need to do, look for TODOx"
+"To find what you need to do, look for TODOx"
 
 When its all done, you should see output like this:
 
@@ -232,7 +232,7 @@ TODO 1f.. Show the output from the following function
 
 
 ; to run encapuatlion, uncomment the following
-'(encapsulation)
+(encapsulation)
 
 #|
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -349,10 +349,25 @@ object
   (and (symbolp x) 
        (eql (char (symbol-name x) 0) #\_)))
 
+(defmacro defklass (klass &key isa has does)
+  (let* ((message     (gensym "MESSAGE"))
+         (b4          (and isa (gethash isa *meta*)))
+         (has-before  (and b4 (about-has b4)))
+         (does-before (and b4 (about-does b4)))
+         (has-final   (append has has-before))
+         (does-final  (append does does-before)))
+    (setf (gethash klass *meta*)
+         (make-about :has has-final :does does-final))
+    `(defun ,klass (&key ,@has-final)
+       (lambda (,message)
+         (case ,message
+           ,@(methods-as-case does-final)
+           ,@(datas-as-case (mapcar #'car has-final)))))))
+
 ; uncomment the following when defklass is implemented
 
-'(defklass 
-  object 
+(defklass
+  object
   :has ((_self)  (_isa) (id (counter)))
   :does (
          (_isa!  (x) (setf _isa  x))
@@ -366,7 +381,7 @@ object
                                 slot-values)))))))
 
 ; uncomment the following when defklass is implemented
-'(defklass
+(defklass
   account
   :isa object
   :has  ((name) (balance 0) (interest-rate .05))
@@ -382,7 +397,7 @@ object
 '(xpand (account))
 
 ; uncomment the following when defklass is implemented
-'(defklass
+(defklass
   trimmed-account
   :isa account
   :does ((withdraw (amt)
@@ -402,7 +417,7 @@ object
 
 ; TODO: 3a show that the following works correctly
 
-'(inheritance)
+(inheritance)
 
 '(xpand (trimmed-account))
 ; TODO: 3b. show that the following prints out the slots of an object.
