@@ -1,0 +1,28 @@
+import { Observer } from "./Observer";
+
+class Observer {
+  subject: Subject
+  filters: RNG[];
+  
+  addFilter(filter: RNG) {
+    this.filters.push(filter);
+  }
+  
+  register(observer: Observer) {
+    this.observers.push(observer);
+  }
+  
+  notifyAll() {
+    this.observers.forEach(function (observer) {
+      observer.notify();
+    });
+  }
+  
+  makeRow() {
+    this.
+  }
+  
+  
+}
+
+export { Observer };
