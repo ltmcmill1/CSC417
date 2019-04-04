@@ -3,6 +3,7 @@
 import { Subject } from "./Subject";
 import { RNG } from "./RNG";
 import { Observer } from "./Observer";
+import { isMainThread } from "worker_threads";
 
 let sub = new Subject();
 sub.addFilter(new RNG("pomposity",0,100));
@@ -27,6 +28,13 @@ if (process.argv[2] === "-n" || process.argv[2] === "--num-repeats") {
   iterations = parseInt(process.argv[3]);
 }
 
-for (let i = 0; i < iterations; i++) {
-  sub.makeRow();
+function makeNewRow(i: any, end: any) {
+  sub.makeRow().then(() => {
+    console.log("completed " + i);
+    if (i < end) {
+      makeNewRow(i + 1, end);
+    }
+  });
 }
+
+makeNewRow(0, iterations);
