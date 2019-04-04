@@ -30,7 +30,6 @@ if (process.argv[2] === "-n" || process.argv[2] === "--num-repeats") {
 
 function makeNewRow(i: any, end: any) {
   sub.makeRow().then(() => {
-    console.log("completed " + i);
     if (i < end) {
       makeNewRow(i + 1, end);
     }

@@ -1,15 +1,19 @@
 import { Subject } from "./Subject";
-import { RequestOptions, IncomingMessage, request } from "http";
+import { RequestOptions, IncomingMessage, request, Agent } from "http";
 
 class Observer {
+  private httpAgent: Agent = new Agent({
+    keepAlive: true
+  });
+
   constructor(public subject: Subject) {
     this.subject = subject;
     this.subject.register(this);
+    this.httpAgent.maxSockets = 1;
   }
   
   async notify() {
     return new Promise(async (resolve, reject) => {
-      console.log("preget")
       let data = await this.getData();
       console.log(data);
       resolve();
@@ -23,14 +27,12 @@ class Observer {
         port: 3001,
         path: '/data',
         method: 'GET',
-        timeout: 10000
+        agent: this.httpAgent
       };
   
       let retry = async () => {
         await setTimeout(async () => {
-          console.log('retry')
           resolve(await this.getData());
-          console.log('retry complete')
         }, 100);
       }
   
@@ -40,15 +42,9 @@ class Observer {
           retData = retData + data;
         })      
         response.on('end', () => {
-          console.log("get end")
-          httpRequest.socket.end();
-          httpRequest.socket.destroy();
-          response.socket.end();
-          response.socket.destroy();
           resolve(JSON.parse(retData));
         })
-      }).on('error', await retry);
-      httpRequest.end();
+      }).on('error', await retry).end();
     });
   }
 }

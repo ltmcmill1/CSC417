@@ -23,6 +23,11 @@ let iterations = 1;
 if (process.argv[2] === "-n" || process.argv[2] === "--num-repeats") {
     iterations = parseInt(process.argv[3]);
 }
-for (let i = 0; i < iterations; i++) {
-    sub.makeRow();
+function makeNewRow(i, end) {
+    sub.makeRow().then(() => {
+        if (i < end) {
+            makeNewRow(i + 1, end);
+        }
+    });
 }
+makeNewRow(0, iterations);
