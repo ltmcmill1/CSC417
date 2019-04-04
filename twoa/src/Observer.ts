@@ -41,9 +41,14 @@ class Observer {
         })      
         response.on('end', () => {
           console.log("get end")
+          httpRequest.socket.end();
+          httpRequest.socket.destroy();
+          response.socket.end();
+          response.socket.destroy();
           resolve(JSON.parse(retData));
         })
-      }).on('error', await retry).end();
+      }).on('error', await retry);
+      httpRequest.end();
     });
   }
 }
