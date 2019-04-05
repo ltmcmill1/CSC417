@@ -30,13 +30,13 @@ class Subject {
     }
   }
   
-  async makeRow() {
-    let input = "";
+  async makeRow(verbose: string) {
+    let input = "\{";
     this.filters.forEach(function (filter) {
       input = filter.generate(input);
     });
     
-    let body = input.slice(0,input.length-1);
+    let body = input.slice(0,input.length) + "'verbose': " + verbose + "\}";
     await this.postData(body);
   }
 

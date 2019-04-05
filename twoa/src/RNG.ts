@@ -6,7 +6,7 @@ class RNG {
   }
   
   generate(input:string) {
-    return input + (Math.random()*(this.max-this.min)+this.min).toFixed(2) + ",";
+    return input + "\'" + this.name + "\': " + (Math.random()*(this.max-this.min)+this.min).toFixed(2) + ", ";
   }
 }
 

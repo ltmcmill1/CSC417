@@ -24,16 +24,26 @@ sub.addFilter(new RNG("r",1,1000));
 let obs = new Observer(sub);
 
 let iterations = 1;
-if (process.argv[2] === "-n" || process.argv[2] === "--num-repeats") {
+let verbose = 'False';
+if (process.argv[2] === "-n") {
   iterations = parseInt(process.argv[3]);
+  if (process.argv[4] === "-v") {
+    verbose = process.argv[5];
+  }
+}
+if (process.argv[4] === "-n") {
+  iterations = parseInt(process.argv[5]);
+  if (process.argv[2] === "-v") {
+    verbose = process.argv[3];
+  }
 }
 
 function makeNewRow(i: any, end: any) {
-  sub.makeRow().then(() => {
+  sub.makeRow(verbose).then(() => {
     if (i < end) {
       makeNewRow(i + 1, end);
     }
   });
 }
 
-makeNewRow(0, iterations);
+makeNewRow(1, iterations);
