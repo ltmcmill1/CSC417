@@ -28,9 +28,9 @@ eg6:  ok; @$(hi); $(Auto10) | dom | bestrest | super | rank
 eg7:  ok; @$(hi); $(Auto1M) | dom | bestrest | super | rank
 
 eg10:
-        @$(MAKE) eg2a |  ./2d  weightSorted 4 weight 4
-        @$(MAKE) eg2a |  ./2d  accelSorted 5 accel 5
-        @$(MAKE) eg2a |  ./2d  domSorted 9 dom 9
-        @$(MAKE) eg2a |  ./2d  mpgSorted 8 mpg 8
-        @$(MAKE) eg2a |  ./2d  displacement 2 dom 9
-        @$(MAKE) eg2a |  ./2d  horsepower 3 dom 9
+		@$(MAKE) eg2a |  ./2d  weightSorted 4 weight 4
+		@$(MAKE) eg2a |  ./2d  accelSorted 5 accel 5
+		@$(MAKE) eg2a |  ./2d  domSorted 9 dom 9
+		@$(MAKE) eg2a |  ./2d  mpgSorted 8 mpg 8
+		@$(MAKE) eg2a |  ./2d  displacement 2 dom 9
+		@$(MAKE) eg2a |  ./2d  horsepower 3 dom 9
