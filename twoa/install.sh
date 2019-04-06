@@ -23,10 +23,13 @@ sudo apt-get install -y python3-setuptools
 sudo python3 setup.py install
 cd $pwd
 
-cp -R dist ./duo/src/typescript_monte_carlo
-cp Makefile ./duo/src/Makefile
+
 
 git clone https://github.com/d-u-o/101 ./duo
+cp -R dist ./duo/src/typescript_monte_carlo
+cp -R node_modules ./duo/src/typescript_monte_carlo/node_modules
+cp Makefile ./duo/src/Makefile
+
 cd duo
 cd etc
 ./ide
