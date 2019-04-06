@@ -1,14 +1,14 @@
 #!/bin/bash
 
-sudo apt-get install curl python-software-properties
+sudo apt-get install -y curl python-software-properties
 curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
-sudo apt-get install nodejs
+sudo apt-get install -y nodejs
 
+sudo npm install -g typescript
 npm install
-npm install -g typescript
 
 sudo apt-get install -y lua5.3 luajit
-sudo apt-get install - y python3 python3-pip python3-setuptools
+sudo apt-get install -y python3 python3-pip python3-setuptools
 
 alias lua='/usr/bin/lua5.3'
 alias python='/usr/bin/python3'
@@ -18,7 +18,7 @@ cd ~
 mkdir installs && cd installs 
 git clone git://github.com/pycco-docs/pycco.git
 cd pycco
-sudo apt-get install python3-setuptools
+sudo apt-get install -y python3-setuptools
 sudo python3 setup.py install
 cd ~/workspace/twoa
 
