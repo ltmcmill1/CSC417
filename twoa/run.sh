@@ -9,5 +9,5 @@ else
     echo "to run the application"
     cd duo
     cd etc
-    ./ide
+    sudo ./ide
 fi
