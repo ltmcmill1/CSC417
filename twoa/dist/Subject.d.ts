@@ -8,7 +8,7 @@ declare class Subject {
     addFilter(filter: RNG): void;
     register(observer: Observer): void;
     notifyAll(): Promise<void>;
-    makeRow(): Promise<void>;
+    makeRow(verbose: string): Promise<void>;
     private postData;
 }
 export { Subject };

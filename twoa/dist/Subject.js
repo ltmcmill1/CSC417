@@ -32,13 +32,13 @@ class Subject {
             }
         });
     }
-    makeRow() {
+    makeRow(verbose) {
         return __awaiter(this, void 0, void 0, function* () {
-            let input = "";
+            let input = "\{";
             this.filters.forEach(function (filter) {
                 input = filter.generate(input);
             });
-            let body = input.slice(0, input.length - 1);
+            let body = input.slice(0, input.length) + "'verbose': " + verbose + "\}";
             yield this.postData(body);
         });
     }
