@@ -27,4 +27,3 @@ git clone https://github.com/d-u-o/101 ./duo
 cd duo
 cd etc
 ./ide
-cd ../src
