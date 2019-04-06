@@ -15,7 +15,7 @@ alias python='/usr/bin/python3'
 alias pip='/usr/bin/pip3'
 
 pwd=$(pwd)
-cd ~
+cd ..
 mkdir installs && cd installs 
 git clone git://github.com/pycco-docs/pycco.git
 cd pycco
@@ -27,4 +27,4 @@ git clone https://github.com/d-u-o/101 ./duo
 cd duo
 cd etc
 ./ide
-../src
+cd ../src
