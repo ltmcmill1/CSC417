@@ -14,13 +14,14 @@ alias lua='/usr/bin/lua5.3'
 alias python='/usr/bin/python3'
 alias pip='/usr/bin/pip3'
 
+pwd=$(pwd)
 cd ~
 mkdir installs && cd installs 
 git clone git://github.com/pycco-docs/pycco.git
 cd pycco
 sudo apt-get install -y python3-setuptools
 sudo python3 setup.py install
-cd ~/workspace/twoa
+cd $pwd
 
 git clone https://github.com/d-u-o/101 ./duo
 cd duo
