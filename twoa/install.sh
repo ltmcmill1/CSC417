@@ -24,6 +24,7 @@ sudo python3 setup.py install
 cd $pwd
 
 cp -R dist ./duo/src/typescript_monte_carlo
+cp Makefile ./duo/src/Makefile
 
 git clone https://github.com/d-u-o/101 ./duo
 cd duo
