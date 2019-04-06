@@ -1,10 +1,13 @@
 #!/bin/bash
 
-if [ ! -e install.true ]; then
+if [ ! -e installed.true ]; then
+    echo "Not yet installed, installing now..."
     sudo bash install.sh
 else
     echo "Install already complete, starting ide..."
     echo "Use: make <target>"
     echo "to run the application"
-    ./duo/etc/ide
+    cd duo
+    cd etc
+    ./ide
 fi
