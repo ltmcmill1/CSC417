@@ -3,7 +3,6 @@
 import { Subject } from "./Subject";
 import { RNG } from "./RNG";
 import { Observer } from "./Observer";
-import { isMainThread } from "worker_threads";
 
 let sub = new Subject();
 sub.addFilter(new RNG("pomposity",0,100));
