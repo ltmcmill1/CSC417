@@ -10,7 +10,7 @@ Auto=cat $(Test)/data/auto.csv
 Auto10=cat $(Test)/data/auto10000.csv
 Auto1M=cat $(Test)/data/auto1M.csv
 Weather=cat $(Test)/data/auto.csv
-DSL= node typescript_monte_carlo/REST_API/rest.js > /dev/null 2>&1 & node typescript_monte_carlo/monte_carlo.js -n 100 | dsl/brooks2
+DSL= node typescript_monte_carlo/REST_API/rest.js > /dev/null 2>&1 & node —random-seed=125 typescript_monte_carlo/monte_carlo.js -n 100 | dsl/brooks2
 
 ok:; @bash $(Etc)/lua2bin
 
