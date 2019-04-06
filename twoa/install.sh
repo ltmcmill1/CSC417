@@ -29,19 +29,20 @@ git clone https://github.com/d-u-o/101 ./duo
 cp -R dist ./duo/src/typescript_monte_carlo
 cp -R node_modules ./duo/src/typescript_monte_carlo/node_modules
 cp Makefile ./duo/src/Makefile
+touch installed.true
 cd duo
 cd etc
 
-echo ###########################################
+echo "###########################################"
 echo
-echo The updated pipeline and makefile has been
-echo intalled. Run:
+echo The updated monte_carlo and Makefile has
+echo been installed. Run:
 echo 
-echo make <target>
+echo "make <target>"
 echo
 echo to run the the updated pipeline with the
 echo specified target.
 echo
-echo ###########################################
+echo "###########################################"
 
 ./ide
