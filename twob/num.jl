@@ -21,3 +21,11 @@ function numInc(t, x)
   end
   return x
 end
+
+function numNorm(t, x)
+  if x == "?"
+    return 0.5
+  else
+    return (x-t["lo"]) / (t["hi"] - t["lo"])
+  end
+end
