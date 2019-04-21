@@ -5,7 +5,7 @@ t = rows(data())
 println("table processed")
 mapIn = Dict()
 
-N = 10
+N = 300
 
 for (id,r) in t["rows"]
   mapIn[id] = [r]
@@ -69,16 +69,16 @@ function row_dom_reduce(k, vs)
   dom = 0
   n = length(t["w"])
   for v in vs
-    # calculate s of k for each column while pushing values
-    # calculate s of v for each column while pushing values
     if v
       dom += 1/N
     end
   end
   push!(out[k], dom)
-  println((k,dom))
+  k[length(k)+1] = dom
   return out
 end
 
-
 reduce(reduce(reduce(map(Dict(mapIn), random_assign_map), random_assign_reduce), pair_dom_reduce), row_dom_reduce)
+
+# Dump out the table dump(t)
+println(t["rows"][1])
