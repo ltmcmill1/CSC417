@@ -2,7 +2,6 @@ include("mapReduce.jl")
 include("table.jl")
 
 t = rows(data())
-println("table processed")
 mapIn = Dict()
 
 N = 300
@@ -81,4 +80,18 @@ end
 reduce(reduce(reduce(map(Dict(mapIn), random_assign_map), random_assign_reduce), pair_dom_reduce), row_dom_reduce)
 
 # Dump out the table dump(t)
-println(t["rows"][1])
+printSize = size(collect(keys(t["rows"])))[1]
+for i in collect(1:printSize)
+  rowLength = size(collect(keys(t["rows"][i])))[1]
+  for a in collect(1:rowLength)
+    if isa(t["rows"][i][a], AbstractFloat)
+      print(round(t["rows"][i][a], 2))
+    else
+      print(t["rows"][i][a])
+    end
+    if a != rowLength
+    print(",")
+    end
+  end
+  println()
+end
