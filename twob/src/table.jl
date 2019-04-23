@@ -53,7 +53,6 @@ end
 function rows(t)
   first = true
   line = readline()
-  print(line)
   while true
     line = replace(line, r"[\n\t\r ]*", "")
     line = replace(line, r"#.*", "")
